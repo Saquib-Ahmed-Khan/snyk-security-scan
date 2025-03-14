@@ -11,7 +11,6 @@ on:
 jobs:
   security_scan:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -27,11 +26,8 @@ jobs:
       - name: Authenticate with Snyk
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Run Snyk security scan
-        run: snyk test --all-projects --fail-on=upgradable
+        run: snyk test --all-projects
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
